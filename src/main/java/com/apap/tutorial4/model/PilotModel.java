@@ -16,8 +16,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "pilot")
-public class PilotModel implements Serializable {
+@Table(name="pilot")
+public class PilotModel implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -26,7 +26,7 @@ public class PilotModel implements Serializable {
 	@Size(max = 50)
 	@Column(name = "license_number", nullable = false, unique = true)
 	private String licenseNumber;
-	
+
 	@NotNull
 	@Size(max = 50)
 	@Column(name = "name", nullable = false)
@@ -36,8 +36,8 @@ public class PilotModel implements Serializable {
 	@Column(name = "fly_hour", nullable = false)
 	private int flyHour;
 	
-	@OneToMany(mappedBy = "pilot", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	private List<FlightModel>pilotFlight;
+	@OneToMany(mappedBy = "pilot", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<FlightModel> pilotFlight;
 
 	public long getId() {
 		return id;
@@ -78,7 +78,4 @@ public class PilotModel implements Serializable {
 	public void setPilotFlight(List<FlightModel> pilotFlight) {
 		this.pilotFlight = pilotFlight;
 	}
-	
-	
-	
-}	
+}

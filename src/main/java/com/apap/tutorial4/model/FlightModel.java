@@ -21,8 +21,8 @@ import org.hibernate.annotations.OnDeleteAction;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "Flight")
-public class FlightModel implements Serializable {
+@Table(name = "flight")
+public class FlightModel implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -30,7 +30,7 @@ public class FlightModel implements Serializable {
 	@NotNull
 	@Size(max = 50)
 	@Column(name = "flight_number", nullable = false)
-	private String flightnumber;
+	private String flightNumber;
 	
 	@NotNull
 	@Size(max = 50)
@@ -42,16 +42,6 @@ public class FlightModel implements Serializable {
 	@Column(name = "destination", nullable = false)
 	private String destination;
 	
-	@NotNull
-	@Column(name = "time")
-	private Date time;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "pilot_licenseNumber", referencedColumnName = "License_number", nullable = false)
-	@OnDelete(action = OnDeleteAction.NO_ACTION)
-	@JsonIgnore
-	private PilotModel pilot;
-
 	public long getId() {
 		return id;
 	}
@@ -60,12 +50,12 @@ public class FlightModel implements Serializable {
 		this.id = id;
 	}
 
-	public String getFlightnumber() {
-		return flightnumber;
+	public String getFlightNumber() {
+		return flightNumber;
 	}
 
-	public void setFlightnumber(String flightnumber) {
-		this.flightnumber = flightnumber;
+	public void setFlightNumber(String flightNumber) {
+		this.flightNumber = flightNumber;
 	}
 
 	public String getOrigin() {
@@ -99,6 +89,14 @@ public class FlightModel implements Serializable {
 	public void setPilot(PilotModel pilot) {
 		this.pilot = pilot;
 	}
+
+	@NotNull
+	@Column(name = "time")
+	private Date time;
 	
-	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "pilot_licenseNumber", referencedColumnName = "license_number", nullable = false)
+	@OnDelete(action = OnDeleteAction.NO_ACTION)
+	@JsonIgnore
+	private PilotModel pilot;
 }
