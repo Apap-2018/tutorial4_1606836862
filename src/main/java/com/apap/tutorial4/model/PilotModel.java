@@ -15,8 +15,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+
+
 @Entity
-@Table(name="pilot")
+@Table(name = "pilot")
 public class PilotModel implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +28,7 @@ public class PilotModel implements Serializable{
 	@Size(max = 50)
 	@Column(name = "license_number", nullable = false, unique = true)
 	private String licenseNumber;
-
+	
 	@NotNull
 	@Size(max = 50)
 	@Column(name = "name", nullable = false)
@@ -78,4 +80,5 @@ public class PilotModel implements Serializable{
 	public void setPilotFlight(List<FlightModel> pilotFlight) {
 		this.pilotFlight = pilotFlight;
 	}
+	
 }

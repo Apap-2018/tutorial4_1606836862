@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.apap.tutorial4.model.FlightModel;
 import com.apap.tutorial4.model.PilotModel;
@@ -28,7 +30,7 @@ public class FlightController {
 		flight.setPilot(pilot);
 		
 		model.addAttribute("flight", flight);
-		return "addFlight";
+		return "addFlight";	
 	}
 	
 	@RequestMapping(value = "/flight/add", method = RequestMethod.POST)
@@ -36,4 +38,5 @@ public class FlightController {
 		flightService.addFlight(flight);
 		return "add";
 	}
+
 }

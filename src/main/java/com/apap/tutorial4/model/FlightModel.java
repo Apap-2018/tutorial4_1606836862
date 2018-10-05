@@ -2,23 +2,12 @@ package com.apap.tutorial4.model;
 
 import java.io.Serializable;
 import java.sql.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "flight")
@@ -36,12 +25,22 @@ public class FlightModel implements Serializable{
 	@Size(max = 50)
 	@Column(name = "origin", nullable = false)
 	private String origin;
-	
+
 	@NotNull
 	@Size(max = 50)
 	@Column(name = "destination", nullable = false)
 	private String destination;
 	
+	@NotNull
+	@Column(name = "time")
+	private Date time;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "pilot_license_number", referencedColumnName = "license_number", nullable = false)
+	@OnDelete(action = OnDeleteAction.NO_ACTION)
+	@JsonIgnore
+	private PilotModel pilot;
+
 	public long getId() {
 		return id;
 	}
@@ -89,14 +88,4 @@ public class FlightModel implements Serializable{
 	public void setPilot(PilotModel pilot) {
 		this.pilot = pilot;
 	}
-
-	@NotNull
-	@Column(name = "time")
-	private Date time;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "pilot_licenseNumber", referencedColumnName = "license_number", nullable = false)
-	@OnDelete(action = OnDeleteAction.NO_ACTION)
-	@JsonIgnore
-	private PilotModel pilot;
 }

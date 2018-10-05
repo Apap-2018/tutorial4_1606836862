@@ -1,9 +1,8 @@
 package com.apap.tutorial4.service;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.apap.tutorial4.model.FlightModel;
 import com.apap.tutorial4.reporsitory.FlightDB;
@@ -12,10 +11,12 @@ import com.apap.tutorial4.reporsitory.FlightDB;
 @Transactional
 public class FlightServiceImpl implements FlightService{
 	@Autowired
-	private FlightDB flightDb;
-	
+	private FlightDB flightDB;
+
 	@Override
 	public void addFlight(FlightModel flight) {
-		flightDb.save(flight);
+		flightDB.save(flight);
+		
 	}
+
 }
