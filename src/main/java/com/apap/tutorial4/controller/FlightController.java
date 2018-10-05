@@ -40,11 +40,32 @@ public class FlightController {
 	}
 	
 	@RequestMapping(value = "/flight/delete/{id}", method = RequestMethod.GET)
-	private String delete(@PathVariable(value = "id") Long id, Model model) {
-		FlightModel flight = flightService.findFlight(id);
+	private String delete(@PathVariable(value = "id") String flightNumber, Model model) {
+		FlightModel flight = flightService.findFlight(flightNumber);
 		
 		flightService.deleteFlight(flight);
 		return "delete";
+	}
+	
+	@RequestMapping(value = "/flight/update/{flightNumber}", method = RequestMethod.GET)
+    private String updateFlight(@PathVariable(value = "flightNumber") String flightNumber, Model model) {
+        FlightModel flight = flightService.findFlight(flightNumber);
+        model.addAttribute("flight", flight);
+        return "update-flight";
+    }
+
+    @RequestMapping(value = "/flight/update/{flightNumber}", method = RequestMethod.POST)
+    private String updateFlight(@PathVariable(value = "flightNumber") String flightNumber, @ModelAttribute FlightModel flight) {
+        flightService.updateFlight(flightNumber, flight);
+        return "update";
+    }
+    
+    @RequestMapping(value= "/flight/view", method = RequestMethod.GET)
+	private String viewFlight(@RequestParam("flightNumber") String flightNumber, Model model) {
+		FlightModel flight = flightService.findFlight(flightNumber);
+		model.addAttribute("flight", flight);
+		model.addAttribute("pilot", flight.getPilot());
+		return "view-flight";
 	}
 
 }

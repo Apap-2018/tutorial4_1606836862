@@ -16,6 +16,10 @@
 	
 	<button><a th:href="@{'/flight/add/'+ ${pilot.licenseNumber}}">Add Flight</a></button>
 	<br><br>
+	<form th:action="@{'/pilot/update/' + ${pilot.licenseNumber}}" method="GET">
+		<button type="delete">Update Pilot Info</button>
+	</form>
+	<br><br>
 	<button><a th:href="@{'/pilot/delete/'+ ${pilot.licenseNumber}}">Delete Pilot</a></button>
 	
 	<br><br>
@@ -28,6 +32,9 @@
         <p th:text="'Asal Penerbangan: ' + ${flight.getOrigin()}"></p>
         <p th:text="'Tujuan Penerbangan: ' + ${flight.getDestination()}"></p>
         <p th:text="'Waktu Penerbangan: ' + ${flight.getTime()}"></p>
+        <br><br>
+        <button><a th:href="@{'/flight/update/' + ${flight.flightNumber}}">update</a></button>
+        <br><br>
         <p>--------------------------------</p>
     </div>
     

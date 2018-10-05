@@ -28,6 +28,15 @@ public class PilotServiceImpl implements PilotService{
 	public void deletePilot(PilotModel pilot) {
 		pilotDB.delete(pilot);
 	}
+
+	@Override
+	public void updatePilot(String licenseNumber, PilotModel pilot) {
+		// TODO Auto-generated method stub
+		PilotModel oldPilot = this.getPilotDetailByLicenseNumber(licenseNumber);
+		oldPilot.setName(pilot.getName());
+		oldPilot.setFlyHour(pilot.getFlyHour());
+		
+	}
 	
 
 }
